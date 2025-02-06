@@ -1,25 +1,49 @@
 import streamlit as st
 import pandas as pd
+import markdown
 from io import StringIO
 
 # Set page title
 st.set_page_config(page_title="Markdown Previewer", layout="wide")
 
-# Apply custom styling
+# Apply custom styling for light and dark themes
 st.markdown("""
     <style>
+        html, body, [class*="st"]  {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
         .stTextArea textarea {
             font-size: 16px;
             font-family: monospace;
-            background-color: #f8f9fa;
+            background-color: var(--input-bg);
             padding: 10px;
+            color: var(--text-color);
         }
         .stMarkdown {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             padding: 15px;
-            background-color: #ffffff;
+            background-color: var(--content-bg);
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #ffffff;
+                --bg-color: #121212;
+                --input-bg: #1e1e1e;
+                --border-color: #333;
+                --content-bg: #222;
+            }
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --text-color: #000000;
+                --bg-color: #ffffff;
+                --input-bg: #f8f9fa;
+                --border-color: #ddd;
+                --content-bg: #ffffff;
+            }
         }
     </style>
 """, unsafe_allow_html=True)
